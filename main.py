@@ -1,8 +1,11 @@
+import sys
 import pygame
 from constants import *
 from player import *
 from asteroid import *
 from asteroidfield import *
+from shot import *
+
 
 def main():
     print("Starting Asteroids!")
@@ -37,6 +40,11 @@ def main():
             if new_player.collision(asteroid) == True:
                 print('Game Over!')
                 raise SystemExit
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collision(asteroid) == True:
+                    shot.kill()
+                    asteroid.kill()
         for item in drawable:
             item.draw(screen)
         pygame.display.flip()
